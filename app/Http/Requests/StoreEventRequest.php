@@ -50,8 +50,10 @@ class StoreEventRequest extends FormRequest
             'meta_description' => ['nullable', 'string', 'max:320'],
             'button_text' => ['nullable', 'string', 'max:100'],
             'button_url' => ['nullable', 'url', 'max:500'],
-            'publish_from' => ['nullable', 'datetime'],
-            'publish_until' => ['nullable', 'datetime', 'after:publish_from'],
+            // 'publish_from' => ['nullable', 'datetime'],
+            // 'publish_until' => ['nullable', 'datetime', 'after:publish_from'],
+            'publish_from' => ['nullable', 'date'],
+            'publish_until' => ['nullable', 'date', 'after:publish_from'],
         ];
     }
 

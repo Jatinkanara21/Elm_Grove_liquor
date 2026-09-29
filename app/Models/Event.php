@@ -145,4 +145,9 @@ class Event extends Model
     {
         return $this->is_published && $this->publish_from && $this->publish_from->isFuture();
     }
+
+    public function isCommemorative(): bool
+    {
+        return in_array(preg_replace('/-\d{4}$/', '', $this->slug), self::COMMEMORATIVE_SLUGS, true);
+    }
 }
