@@ -3,7 +3,12 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\StoreController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,15 +23,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', DashboardController::class)->name('dashboard');
 
         Route::resource('products', ProductController::class)->except('show');
-
         Route::patch('categories/{category}/toggle', [CategoryController::class, 'toggle'])->name('categories.toggle');
         Route::resource('categories', CategoryController::class)->except('show');
-
         Route::resource('stores', StoreController::class)->except('show');
-
-        // Part 5B adds: events, reviews, messages, settings, profile.
-    });
-});
 
         Route::patch('events/{event}/toggle-publish', [EventController::class, 'togglePublish'])->name('events.toggle-publish');
         Route::patch('events/{event}/preview', [EventController::class, 'preview'])->name('events.preview');
@@ -49,3 +48,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::post('profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::post('profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+    });
+});
