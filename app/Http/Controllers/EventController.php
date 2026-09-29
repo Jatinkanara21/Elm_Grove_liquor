@@ -64,7 +64,7 @@ class EventController extends Controller
         abort_unless($visible || auth()->user()?->is_admin, 404);
 
         $related = Event::visible()
-            ->whereKeyNot($event->id)
+            ->where('id', '!=', $event->id)
             ->orderByRaw('ABS(DATEDIFF(event_date, ?))', [$event->event_date->toDateString()])
             ->take(3)
             ->get();
