@@ -27,13 +27,13 @@ Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/archive', [EventController::class, 'archive'])->name('events.archive');
 Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
 
-// Temporary placeholders until legal pages are written.
-Route::view('/privacy-policy', 'pages.placeholder', ['title' => 'Privacy Policy'])->name('privacy');
-Route::view('/terms', 'pages.placeholder', ['title' => 'Terms'])->name('terms');
+Route::view('/privacy-policy', 'pages.privacy-policy')->name('privacy');
+Route::view('/terms', 'pages.terms')->name('terms');
 
 require __DIR__ . '/admin.php';
 
 Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+
 Route::get('/robots.txt', function () {
     $robots = "User-agent: *\n";
     $robots .= "Allow: /\n";
@@ -44,6 +44,3 @@ Route::get('/robots.txt', function () {
 
     return response($robots)->header('Content-Type', 'text/plain');
 })->name('robots');
-
-Route::view('/privacy-policy', 'pages.privacy-policy')->name('privacy');
-Route::view('/terms', 'pages.terms')->name('terms');
