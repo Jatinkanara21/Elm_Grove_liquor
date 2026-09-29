@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Support\SeasonalTheme;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -31,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
             ['label' => 'Reviews',  'route' => 'reviews.index', 'match' => 'reviews.*'],
             ['label' => 'Contact',  'route' => 'contact',       'match' => 'contact'],
         ]);
+
         View::composer('layouts.app', function ($view) {
             $view->with('season', SeasonalTheme::current());
         });
