@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Store;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -78,7 +79,8 @@ class EventController extends Controller
     {
         return view('events.show', [
             'event' => $event,
-            'related' => Event::visible()->whereKeyNot($event->id)->latest('event_date')->take(3)->get(),
+            'related' => Event::visible()->where('id', '!=', $event->id)->latest('event_date')->take(3)->get(),
+            'store' => Store::active()->first(),
         ]);
     }
 
